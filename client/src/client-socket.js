@@ -1,14 +1,9 @@
 import socketIOClient from "socket.io-client";
 import { post } from "./utilities";
-import { processUpdate } from "./state";
 const endpoint = window.location.hostname + ":" + window.location.port;
 export const socket = socketIOClient(endpoint);
 socket.on("connect", () => {
   post("/api/initsocket", { socketid: socket.id });
-});
-
-socket.on("update", (update) => {
-  processUpdate(update);
 });
 
 export const move = (dir) => {
