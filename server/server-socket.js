@@ -1,3 +1,5 @@
+const logic = require("./logic");
+
 let io;
 
 const userToSocketMap = {}; // maps user ID to socket object
@@ -9,6 +11,7 @@ const getSocketFromSocketID = (socketid) => io.sockets.connected[socketid];
 
 const addUser = (user, socket) => {
   const oldSocket = userToSocketMap[user._id];
+  logic.addPlayer(user._id);
   if (oldSocket && oldSocket.id !== socket.id) {
     // there was an old tab open for this user, force it to disconnect
     // FIXME: is this the behavior you want?
@@ -18,11 +21,20 @@ const addUser = (user, socket) => {
 
   userToSocketMap[user._id] = socket;
   socketToUserMap[socket.id] = user;
+  sendGameState();
 };
 
 const removeUser = (user, socket) => {
-  if (user) delete userToSocketMap[user._id];
+  if (user) {
+    delete userToSocketMap[user._id];
+    logic.removePlayer(user._id);
+  }
   delete socketToUserMap[socket.id];
+  sendGameState();
+};
+
+const sendGameState = () => {
+  io.emit("update", logic.gameState);
 };
 
 module.exports = {
@@ -34,6 +46,11 @@ module.exports = {
       socket.on("disconnect", (reason) => {
         const user = getUserFromSocketID(socket.id);
         removeUser(user, socket);
+      });
+      socket.on("move", (dir) => {
+        const user = getUserFromSocketID(socket.id);
+        if (user) logic.movePlayer(user._id, dir);
+        sendGameState();
       });
     });
   },
