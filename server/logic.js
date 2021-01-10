@@ -4,6 +4,10 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
 };
 
+const getDistanceFromGoal = (player) => {
+  return Math.abs(player.x - goal.x) + Math.abs(player.y - goal.y);
+};
+
 const getRandomLocation = () => {
   return {
     x: getRandomInt(-20, 20) * 20,
@@ -11,6 +15,14 @@ const getRandomLocation = () => {
   };
 };
 
+const getPlayerColor = (player) => {
+  const dist = Math.min(getDistanceFromGoal(player) / 800, 1);
+  const blueValue = (1 - dist) * 255;
+  const redValue = dist * 255;
+  return `rgb(${redValue}, 0, ${blueValue})`;
+};
+
+const goal = getRandomLocation();
 const MAGNITUDE = 20;
 
 const gameState = {
@@ -18,12 +30,11 @@ const gameState = {
   winner: null,
 };
 
-const goal = getRandomLocation();
-
 const addPlayer = (id) => {
   if (!(id in gameState)) {
     gameState.players[id] = getRandomLocation();
   }
+  gameState.color = getPlayerColor(gameState.players[id]);
 };
 
 const movePlayer = (id, dir) => {
@@ -37,6 +48,7 @@ const movePlayer = (id, dir) => {
   } else if (dir === "right") {
     gameState.players[id].x += MAGNITUDE;
   }
+  gameState.players[id].color = getPlayerColor(gameState.players[id]);
   checkWin();
 };
 

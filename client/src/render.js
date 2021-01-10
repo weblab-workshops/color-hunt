@@ -8,11 +8,11 @@ const convertCoord = (x, y) => {
   };
 };
 
-const drawPlayer = (context, x, y) => {
+const drawPlayer = (context, x, y, color) => {
   const { drawX, drawY } = convertCoord(x, y);
   context.beginPath();
   context.arc(drawX, drawY, 20, 0, 2 * Math.PI, false);
-  context.fillStyle = "red";
+  context.fillStyle = color;
   context.fill();
 };
 
@@ -23,6 +23,6 @@ export const drawCanvas = (drawState) => {
   context.fillStyle = "black";
   context.fillRect(0, 0, canvas.width, canvas.height);
   Object.values(drawState.players).forEach((p) => {
-    drawPlayer(context, p.x, p.y);
+    drawPlayer(context, p.x, p.y, p.color);
   });
 };
