@@ -34,7 +34,7 @@ const addPlayer = (id) => {
   if (!(id in gameState)) {
     gameState.players[id] = getRandomLocation();
   }
-  gameState.color = getPlayerColor(gameState.players[id]);
+  gameState.players[id].color = getPlayerColor(gameState.players[id]);
 };
 
 const movePlayer = (id, dir) => {

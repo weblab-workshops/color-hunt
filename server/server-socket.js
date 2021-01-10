@@ -21,7 +21,6 @@ const addUser = (user, socket) => {
 
   userToSocketMap[user._id] = socket;
   socketToUserMap[socket.id] = user;
-  sendGameState();
 };
 
 const removeUser = (user, socket) => {
@@ -30,8 +29,11 @@ const removeUser = (user, socket) => {
     logic.removePlayer(user._id);
   }
   delete socketToUserMap[socket.id];
-  sendGameState();
 };
+
+setInterval(() => {
+  sendGameState();
+}, 1000 / 60);
 
 const sendGameState = () => {
   io.emit("update", logic.gameState);
@@ -50,7 +52,6 @@ module.exports = {
       socket.on("move", (dir) => {
         const user = getUserFromSocketID(socket.id);
         if (user) logic.movePlayer(user._id, dir);
-        sendGameState();
       });
     });
   },
