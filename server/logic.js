@@ -29,20 +29,12 @@ const goal = getRandomLocation();
 const MAGNITUDE = 20;
 
 /** game state */
-const gameState = {
-  players: {},
-  winner: null,
-};
+const gameState = {};
 
 /** game logic */
 
 /** Adds a player to the game state, initialized with a random location */
-const addPlayer = (id) => {
-  if (!(id in gameState)) {
-    gameState.players[id] = getRandomLocation();
-  }
-  gameState.players[id].color = getPlayerColor(gameState.players[id]);
-};
+const addPlayer = (id) => {};
 
 /** Moves a player based off the sent data from the "move" socket msg */
 const movePlayer = (id, dir) => {};
@@ -51,9 +43,7 @@ const movePlayer = (id, dir) => {};
 const checkWin = () => {};
 
 /** Remove a player from the game state if they DC */
-const removePlayer = (id) => {
-  delete gameState.players[id];
-};
+const removePlayer = (id) => {};
 
 module.exports = {
   gameState,
