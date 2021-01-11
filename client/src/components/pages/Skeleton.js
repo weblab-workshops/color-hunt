@@ -18,21 +18,7 @@ class Skeleton extends Component {
   }
 
   render() {
-    return (
-      <>
-        {this.props.userId ? (
-          <Game />
-        ) : (
-          // <GoogleLogin
-          //   clientId={GOOGLE_CLIENT_ID}
-          //   buttonText="Login"
-          //   onSuccess={this.props.handleLogin}
-          //   onFailure={(err) => console.log(err)}
-          // />
-          <Login handleLogin={this.props.handleLogin} />
-        )}
-      </>
-    );
+    return <>{this.props.userId ? <Game /> : <Login handleLogin={this.props.handleLogin} />}</>;
   }
 }
 

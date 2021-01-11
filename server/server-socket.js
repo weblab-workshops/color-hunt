@@ -11,6 +11,7 @@ const getSocketFromSocketID = (socketid) => io.sockets.connected[socketid];
 
 const addUser = (user, socket) => {
   const oldSocket = userToSocketMap[user._id];
+  // call the game logic to add this player to the game state
   logic.addPlayer(user._id);
   if (oldSocket && oldSocket.id !== socket.id) {
     // there was an old tab open for this user, force it to disconnect
@@ -26,6 +27,7 @@ const addUser = (user, socket) => {
 const removeUser = (user, socket) => {
   if (user) {
     delete userToSocketMap[user._id];
+    // call the game logic to remove this player from the game state
     logic.removePlayer(user._id);
   }
   delete socketToUserMap[socket.id];

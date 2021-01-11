@@ -1,5 +1,7 @@
 let canvas;
 /** utils */
+
+// converts a coordinate in a normal X Y plane to canvas coordinates
 const convertCoord = (x, y) => {
   if (!canvas) return;
   return {
@@ -8,14 +10,19 @@ const convertCoord = (x, y) => {
   };
 };
 
+// fills a circle at a given x, y canvas coord with radius and color
+const fillCircle = (context, x, y, radius, color) => {
+  context.beginPath();
+  context.arc(x, y, radius, 0, 2 * Math.PI, false);
+  context.fillStyle = color;
+  context.fill();
+};
+
 /** drawing functions */
 
 const drawPlayer = (context, x, y, color) => {
   const { drawX, drawY } = convertCoord(x, y);
-  context.beginPath();
-  context.arc(drawX, drawY, 20, 0, 2 * Math.PI, false);
-  context.fillStyle = color;
-  context.fill();
+  fillCircle(context, drawX, drawY, 20, color);
 };
 
 /** main draw */
