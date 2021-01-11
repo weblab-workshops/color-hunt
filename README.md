@@ -1,5 +1,3 @@
-# Simple Game
+# Color Hunt
 
-Good luck folks <3
-
-web.lab 4 lyfe
+Good luck on all your amazing games/websites folks <3
