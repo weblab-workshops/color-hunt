@@ -1,3 +1,5 @@
+/** Utils! */
+
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -22,14 +24,19 @@ const getPlayerColor = (player) => {
   return `rgb(${redValue}, 0, ${blueValue})`;
 };
 
+/** constants */
 const goal = getRandomLocation();
 const MAGNITUDE = 20;
 
+/** game state */
 const gameState = {
   players: {},
   winner: null,
 };
 
+/** game logic */
+
+/** Adds a player to the game state, initialized with a random location */
 const addPlayer = (id) => {
   if (!(id in gameState)) {
     gameState.players[id] = getRandomLocation();
@@ -37,6 +44,7 @@ const addPlayer = (id) => {
   gameState.players[id].color = getPlayerColor(gameState.players[id]);
 };
 
+/** Moves a player based off the sent data from the "move" socket msg */
 const movePlayer = (id, dir) => {
   if (!(id in gameState.players) || gameState.winner) return;
   if (dir === "up") {
@@ -52,6 +60,7 @@ const movePlayer = (id, dir) => {
   checkWin();
 };
 
+/** Checks whether a player has won, if a player won, change the game state */
 const checkWin = () => {
   Object.keys(gameState.players).forEach((key) => {
     if (gameState.players[key].x === goal.x && gameState.players[key].y === goal.y) {
@@ -60,6 +69,7 @@ const checkWin = () => {
   });
 };
 
+/** Remove a player from the game state if they DC */
 const removePlayer = (id) => {
   delete gameState.players[id];
 };
