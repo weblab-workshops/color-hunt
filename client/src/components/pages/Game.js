@@ -4,7 +4,7 @@ import "../../utilities.css";
 import "../../input";
 import "./Game.css";
 import { socket } from "../../client-socket";
-import { drawCanvas } from "../../render";
+import { drawCanvas } from "../../canvasManager";
 
 class Game extends Component {
   constructor(props) {

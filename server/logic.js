@@ -17,7 +17,8 @@ const getRandomLocation = () => {
   };
 };
 
-const getPlayerColor = (player) => {
+const getPlayerColor = (id) => {
+  const player = gameState.players[id];
   const dist = Math.min(getDistanceFromGoal(player) / 800, 1);
   const blueValue = (1 - dist) * 255;
   const redValue = dist * 255;
@@ -38,7 +39,7 @@ const gameState = {
 /** Adds a player to the game state, initialized with a random location */
 const addPlayer = (id) => {
   gameState.players[id] = getRandomLocation();
-  gameState.players[id].color = getPlayerColor(gameState.players[id]);
+  gameState.players[id].color = getPlayerColor(id);
 };
 
 /** Moves a player based off the sent data from the "move" socket msg */
@@ -52,7 +53,7 @@ const movePlayer = (id, dir) => {
   } else if (dir === "right") {
     gameState.players[id].x += 20;
   }
-  gameState.players[id].color = getPlayerColor(gameState.players[id]);
+  gameState.players[id].color = getPlayerColor(id);
   checkWin();
 };
 
