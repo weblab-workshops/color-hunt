@@ -21,9 +21,7 @@ class Game extends Component {
   }
 
   processUpdate = (update) => {
-    if (update.winner) {
-      this.setState({ winner: update.winner });
-    }
+    /** TODO Step 2 update UI when won game */
     drawCanvas(update);
   };
 
