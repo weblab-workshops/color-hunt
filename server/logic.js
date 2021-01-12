@@ -48,16 +48,7 @@ const addPlayer = (id) => {
  * dir: "up", "down", "left", or "right", passed to server through socket from input.js
  */
 const movePlayer = (id, dir) => {
-  if (dir === "up") {
-    gameState.players[id].y += 20;
-  } else if (dir === "down") {
-    gameState.players[id].y -= 20;
-  } else if (dir === "left") {
-    gameState.players[id].x -= 20;
-  } else if (dir === "right") {
-    gameState.players[id].x += 20;
-  }
-  gameState.players[id].color = getPlayerColor(id);
+  // TODO Step 1 move logic
   // TODO Step 2 check win on move
 };
 
