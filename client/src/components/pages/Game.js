@@ -20,7 +20,12 @@ class Game extends Component {
     });
   }
 
-  processUpdate = (update) => {};
+  processUpdate = (update) => {
+    if (update.winner) {
+      this.setState({ winner: update.winner });
+    }
+    drawCanvas(update);
+  };
 
   render() {
     let winnerModal = null;
