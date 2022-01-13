@@ -42,7 +42,11 @@ const addPlayer = (id) => {
   gameState.players[id].color = getPlayerColor(id);
 };
 
-/** Moves a player based off the sent data from the "move" socket msg */
+/**
+ * Moves a player based off the sent data from the "move" socket msg
+ * id: the player to move
+ * dir: "up", "down", "left", or "right", passed to server through socket from input.js
+ */
 const movePlayer = (id, dir) => {
   if (dir === "up") {
     gameState.players[id].y += 20;
@@ -54,18 +58,12 @@ const movePlayer = (id, dir) => {
     gameState.players[id].x += 20;
   }
   gameState.players[id].color = getPlayerColor(id);
-  checkWin();
+  // TODO Step 2 check win on move
 };
 
 /** Checks whether a player has won, if a player won, change the game state */
 const checkWin = () => {
-  Object.keys(gameState.players).forEach((key) => {
-    // check if they are on top of goal
-    const player = gameState.players[key];
-    if (player.x === goal.x && player.y === goal.y) {
-      gameState.winner = key;
-    }
-  });
+  // TODO Step 2
 };
 
 /** Remove a player from the game state if they DC */

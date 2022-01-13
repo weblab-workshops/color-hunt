@@ -16,9 +16,7 @@ const Game = () => {
   }, []);
 
   const processUpdate = (update) => {
-    if (update.winner) {
-      setWinner(update.winner);
-    }
+    /** TODO Step 2 update UI when won game */
     drawCanvas(update);
   };
 
