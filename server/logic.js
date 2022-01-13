@@ -30,16 +30,14 @@ const goal = getRandomLocation();
 
 /** game state */
 const gameState = {
-  winner: null,
-  players: {},
+  // TODO Step 0
 };
 
 /** game logic */
 
 /** Adds a player to the game state, initialized with a random location */
 const addPlayer = (id) => {
-  gameState.players[id] = getRandomLocation();
-  gameState.players[id].color = getPlayerColor(id);
+  // TODO Step 0
 };
 
 /**
@@ -59,7 +57,7 @@ const checkWin = () => {
 
 /** Remove a player from the game state if they DC */
 const removePlayer = (id) => {
-  delete gameState.players[id];
+  // TODO Step 0
 };
 
 module.exports = {

@@ -16,8 +16,7 @@ const Game = () => {
   }, []);
 
   const processUpdate = (update) => {
-    /** TODO Step 2 update UI when won game */
-    drawCanvas(update);
+    /** TODO Step 0 process updates */
   };
 
   let winnerModal = null;
