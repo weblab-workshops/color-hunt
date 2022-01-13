@@ -1,25 +1,12 @@
-import React, { Component } from "react";
-import GoogleLogin, { GoogleLogout } from "react-google-login";
-
-import "../../utilities.css";
-import "./Skeleton.css";
+import React from "react";
 import Login from "./Login";
 import Game from "./Game";
 
-class Skeleton extends Component {
-  constructor(props) {
-    super(props);
-    // Initialize Default State
-    this.state = {};
-  }
+import "../../utilities.css";
+import "./Skeleton.css";
 
-  componentDidMount() {
-    // remember -- api calls go here!
-  }
-
-  render() {
-    return <>{this.props.userId ? <Game /> : <Login handleLogin={this.props.handleLogin} />}</>;
-  }
-}
+const Skeleton = ({ userId, handleLogin }) => {
+  return <>{userId ? <Game /> : <Login handleLogin={handleLogin} />}</>;
+};
 
 export default Skeleton;
